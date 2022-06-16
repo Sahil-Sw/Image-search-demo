@@ -1,20 +1,30 @@
 import styled from "styled-components";
-// import SearchIcon from "./icon.png";
 import { useState } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux/es/exports";
-import { getImageInitiate, imageRecievedSuccess } from "./redux/actionCreator";
 
 const SearchInput = styled.input`
   width: 600px;
   padding: 10px 12px;
+  border: none;
+  color: #777;
+  font-size: 16px;
+  box-shadow: 2px 3px 4px 0 rgba(0, 0, 0, 0.2);
+  font-family: "Roboto Condensed", sans-serif;
+  width: 80%;
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const SearchBarContainer = styled.div`
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  margin-bottom: 30px;
 `;
 
 const SearchButton = styled.div`
@@ -22,40 +32,40 @@ const SearchButton = styled.div`
   height: 40px;
   background: #000;
   color: #fff;
+  font-family: "Roboto Condensed", sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 0 5px;
-
+  margin-left: 20px;
   &:hover {
     cursor: pointer;
     opacity: 0.8;
   }
 `;
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [keyword, setKeyword] = useState("");
-  const dispatch = useDispatch();
-
-  const CLIENT_ID = "rbvpxYawPfdzhWr37-abic6ehzzYG0oO0tBEy59F17U";
 
   const onChangeHanlder = (e) => {
     setKeyword(e.target.value);
   };
 
   const onSearchHandler = async (e) => {
-    dispatch(getImageInitiate());
-    const url = `https://api.unsplash.com/search/photos/?page=1&query=${keyword}&client_id=${CLIENT_ID}`;
-    const results = await axios.get(url);
-    dispatch(imageRecievedSuccess(results.data));
-    console.log(results);
+    props.getKeyword(keyword);
+    props.makeIntialRequest(keyword, 1);
+    props.resetPageNo(1);
   };
 
   return (
     <SearchBarContainer>
       {" "}
-      <SearchInput type="search" onChange={onChangeHanlder}></SearchInput>
+      <SearchInput
+        type="search"
+        onChange={onChangeHanlder}
+        placeholder="Enter a search term"
+      ></SearchInput>
       <SearchButton onClick={onSearchHandler}>Search</SearchButton>
     </SearchBarContainer>
   );
