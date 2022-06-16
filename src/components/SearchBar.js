@@ -23,7 +23,7 @@ const SearchInput = styled.input`
   }
 `;
 
-const SearchBarContainer = styled.div`
+const SearchBarContainer = styled.form`
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -67,21 +67,22 @@ const SearchBar = (props) => {
     setKeyword(e.target.value);
   };
 
-  const onSearchHandler = async (e) => {
+  const onSearchHandler = (e) => {
+    e.preventDefault();
     props.getKeyword(keyword);
     props.makeIntialRequest(keyword, 1);
     props.resetPageNo(1);
   };
 
   return (
-    <SearchBarContainer>
+    <SearchBarContainer onSubmit={onSearchHandler}>
       {" "}
       <SearchInput
         type="search"
         onChange={onChangeHanlder}
         placeholder="Enter a search term"
       ></SearchInput>
-      <SearchButton onClick={onSearchHandler}>Search</SearchButton>
+      <SearchButton type="submit">Search</SearchButton>
     </SearchBarContainer>
   );
 };
