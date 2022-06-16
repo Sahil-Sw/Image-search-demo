@@ -15,11 +15,33 @@ const MainContainer = styled.div`
   height: 100vh;
   background: #ccc;
   padding-top: 70px;
+  overflow: none;
+
+  @media (max-width: 768px) {
+    min-width: 768px;
+    height: auto;
+    min-height: 700px;
+    margin: 0;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (max-width: 400px) {
+    min-width: 400px;
+    height: auto;
+    min-height: 600px;
+  }
 `;
 
 const InsideContainer = styled.div`
-  width: 1100px;
+  width: 60%;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    width: 70%;
+  }
 `;
 
 const ImageContainer = styled.div`
@@ -27,6 +49,9 @@ const ImageContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 768px) {
+    justify-content: space-evenly;
+  }
 `;
 
 const SearchTermContainer = styled.div`

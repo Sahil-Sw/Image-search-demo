@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useState } from "react";
 
 const SearchInput = styled.input`
-  width: 600px;
+  width: 80%;
   padding: 10px 12px;
   border: none;
   color: #777;
@@ -17,6 +17,10 @@ const SearchInput = styled.input`
   &:focus {
     outline: none;
   }
+
+  @media (max-width: 400px) {
+    width: 250px;
+  }
 `;
 
 const SearchBarContainer = styled.div`
@@ -25,6 +29,11 @@ const SearchBarContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   margin-bottom: 30px;
+
+  @media (max-width: 400px) {
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 const SearchButton = styled.div`
@@ -42,6 +51,12 @@ const SearchButton = styled.div`
   &:hover {
     cursor: pointer;
     opacity: 0.8;
+  }
+
+  @media (max-width: 400px) {
+    width: 240px;
+    margin-top: 20px;
+    margin-left: 0;
   }
 `;
 
